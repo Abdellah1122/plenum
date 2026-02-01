@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* High-End Gallery Palette */
+  --background: #F9F9F8;
+  /* Alabaster / Gallery White */
+  --foreground: #1B1B1B;
+  /* Soft Black */
+
+  --card: #FFFFFF;
+  --card-foreground: #1B1B1B;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #1B1B1B;
+
+  --primary: #2C3E30;
+  /* Deep Forest Green - The Main Anchor */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #9C8160;
+  /* Muted Bronze/Gold */
+  --secondary-foreground: #FFFFFF;
+
+  --accent: #D6CFC7;
+  /* Warm Grey for subtle interactions */
+  --accent-foreground: #1B1B1B;
+
+  --muted: #EAEAE5;
+  /* Very subtle warm grey */
+  --muted-foreground: #6C6C67;
+
+  --destructive: #7F1D1D;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #E2E2DE;
+  --input: #FFFFFF;
+  --ring: #9C8160;
+
+  --radius: 0rem;
+  /* Sharp corners are more premium */
+
+  /* Sidebar Specifics */
+  --sidebar: #F9F9F8;
+  --sidebar-foreground: #1B1B1B;
+  --sidebar-primary: #2C3E30;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EAEAE5;
+  --sidebar-accent-foreground: #1B1B1B;
+  --sidebar-border: #E2E2DE;
+  --sidebar-ring: #9C8160;
+}
+
+.dark {
+  /* Dark Mode - Deep Editorial Feel */
+  --background: #141614;
+  /* Very Dark Green-Black */
+  --foreground: #EAEAE5;
+
+  --card: #1C1E1C;
+  --card-foreground: #EAEAE5;
+
+  --popover: #1C1E1C;
+  --popover-foreground: #EAEAE5;
+
+  --primary: #5A705F;
+  /* Muted Sage for better contrast on dark */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #B0987A;
+  /* Lighter Bronze */
+  --secondary-foreground: #141614;
+
+  --accent: #2A2C2A;
+  --accent-foreground: #EAEAE5;
+
+  --muted: #2A2C2A;
+  --muted-foreground: #888884;
+
+  --destructive: #7F1D1D;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #2A2C2A;
+  --input: #2A2C2A;
+  --ring: #B0987A;
+
+  --sidebar: #141614;
+  --sidebar-foreground: #EAEAE5;
+  --sidebar-primary: #5A705F;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2A2C2A;
+  --sidebar-accent-foreground: #EAEAE5;
+  --sidebar-border: #2A2C2A;
+  --sidebar-ring: #B0987A;
+}
+
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tight;
+  }
+}
