@@ -1,5 +1,8 @@
+'use client';
+
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import Link from 'next/link'
 
 export default function PrintOnDemand() {
   const products = [
@@ -44,9 +47,9 @@ export default function PrintOnDemand() {
                 Reproductions de qualité muséale produites selon les normes exigeantes de l'artiste.
               </p>
               <div className="flex gap-8">
-                <button className="px-8 py-4 bg-primary text-white text-xs font-bold tracking-[0.2em] hover:bg-primary/90 transition-colors">
+                <Link href="/print-on-demand/configurator" className="px-8 py-4 bg-primary text-white text-xs font-bold tracking-[0.2em] hover:bg-primary/90 transition-colors block text-center">
                   CRÉER MAINTENANT
-                </button>
+                </Link>
                 <button className="px-8 py-4 border border-foreground/20 text-foreground text-xs font-bold tracking-[0.2em] hover:border-primary hover:text-primary transition-colors">
                   VOIR LE CATALOGUE
                 </button>
@@ -117,9 +120,11 @@ export default function PrintOnDemand() {
                   ))}
                 </ul>
 
-                <button className="w-full py-3 border border-foreground text-foreground text-sm font-bold tracking-wider hover:bg-foreground hover:text-white transition-colors">
+                <Link
+                  href={`/print-on-demand/configurator?material=${product.id === 1 ? 'paper' : product.id === 2 ? 'canvas' : 'metal'}`}
+                  className="block w-full py-3 border border-foreground text-foreground text-sm font-bold tracking-wider hover:bg-foreground hover:text-white transition-colors text-center">
                   COMMENCER
-                </button>
+                </Link>
               </div>
             ))}
           </div>

@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { supabase } from '@/lib/supabase'
+import { useCart } from '@/context/cart-context'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { user, isLoaded } = useUser()
+  const { itemCount } = useCart()
   const [role, setRole] = useState<string | null>(null)
 
   useEffect(() => {
@@ -115,9 +117,10 @@ export function Header() {
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
 
-          <button className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors">
-            Panier (0)
-          </button>
+
+          <Link href="/cart" className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors">
+            Panier ({itemCount})
+          </Link>
         </div>
 
         {/* Mobile Cart/Account placeholders */}
@@ -125,7 +128,7 @@ export function Header() {
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
-          <span className="text-sm">Panier (0)</span>
+          <span className="text-sm">Panier ({itemCount})</span>
         </div>
 
         {/* Mobile Full Screen Menu */}

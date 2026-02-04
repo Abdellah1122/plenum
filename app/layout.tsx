@@ -41,6 +41,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { CartProvider } from '@/context/cart-context';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,9 +52,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${manrope.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}>
-          <ProfileSync />
-          {children}
-          <Analytics />
+          <CartProvider>
+            <ProfileSync />
+            {children}
+            <Analytics />
+          </CartProvider>
         </body>
       </html>
     </ClerkProvider>
