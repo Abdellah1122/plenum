@@ -1,0 +1,29 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Run every day at midnight UTC (Supabase pauses after 7 days)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual run
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        # We only need supabase-js, but installing all is fine or we can just npm install @supabase/supabase-js
+        run: npm install @supabase/supabase-js
+
+      - name: Run Keep Alive Script
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        run: node scripts/keep-alive.js
