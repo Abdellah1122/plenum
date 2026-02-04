@@ -1,16 +1,33 @@
+'use client';
+
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabase'
+import Link from 'next/link'
 
 export default function Marketplace() {
-  const artworks = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    title: `Composition N°${i + 1}`,
-    artist: 'Nom de l\'Artiste',
-    year: '2024',
-    price: Math.floor(Math.random() * 5000) + 1200,
-    category: ['Abstrait', 'Figuratif', 'Paysage', 'Numérique'][i % 4],
-    dimensions: '24 x 36 in'
-  }))
+  /* 
+  // OLD MOCK DATA - REMOVED
+  const artworks = Array.from({ length: 12 }, (_, i) => ({ ... })) 
+  */
+
+  const [artworks, setArtworks] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function fetchArtworks() {
+      const { data, error } = await supabase.from('artworks').select('*')
+      if (data) {
+        setArtworks(data)
+      } else {
+        console.error(error)
+        // Fallback to empty or error state
+      }
+      setLoading(false)
+    }
+    fetchArtworks()
+  }, [])
 
   return (
     <>
@@ -68,41 +85,42 @@ export default function Marketplace() {
           {/* Artworks Grid - Masonry Feel */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-24">
             {artworks.map((artwork, i) => (
-              <div
-                key={artwork.id}
-                className={`group cursor-pointer ${i % 2 === 0 ? 'md:translate-y-12' : ''}`}
-              >
-                <div className="relative aspect-[3/4] bg-muted mb-6 overflow-hidden">
-                  <div className="absolute inset-0 bg-primary/5 transition-colors duration-700" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-secondary/10">
-                    <span className="text-xs font-bold tracking-[0.3em] text-white uppercase border border-white px-6 py-3 hover:bg-white hover:text-primary transition-colors">
-                      Voir l'Œuvre
-                    </span>
+              <Link href={`/marketplace/${artwork.id}`} key={artwork.id} className="block">
+                <div
+                  className={`group cursor-pointer ${i % 2 === 0 ? 'md:translate-y-12' : ''}`}
+                >
+                  <div className="relative aspect-[3/4] bg-muted mb-6 overflow-hidden">
+                    <div className="absolute inset-0 bg-primary/5 transition-colors duration-700" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-secondary/10">
+                      <span className="text-xs font-bold tracking-[0.3em] text-white uppercase border border-white px-6 py-3 hover:bg-white hover:text-primary transition-colors">
+                        Voir l'Œuvre
+                      </span>
+                    </div>
+                    {/* Mock Image Placeholder */}
+                    <div className="absolute bottom-4 right-4 text-[4rem] font-heading text-primary/10 select-none">
+                      {i + 1}
+                    </div>
                   </div>
-                  {/* Mock Image Placeholder */}
-                  <div className="absolute bottom-4 right-4 text-[4rem] font-heading text-primary/10 select-none">
-                    {i + 1}
-                  </div>
-                </div>
 
-                <div className="space-y-1 pr-4 border-l border-transparent group-hover:border-secondary pl-0 group-hover:pl-4 transition-all duration-300">
-                  <h3 className="font-heading text-2xl text-foreground font-medium">
-                    {artwork.title}
-                  </h3>
-                  <div className="flex justify-between items-baseline">
-                    <p className="text-sm font-bold tracking-widest text-secondary uppercase">{artwork.artist}</p>
-                    <p className="font-light text-foreground text-lg">
-                      {artwork.price.toLocaleString()} €
-                    </p>
+                  <div className="space-y-1 pr-4 border-l border-transparent group-hover:border-secondary pl-0 group-hover:pl-4 transition-all duration-300">
+                    <h3 className="font-heading text-2xl text-foreground font-medium">
+                      {artwork.title}
+                    </h3>
+                    <div className="flex justify-between items-baseline">
+                      <p className="text-sm font-bold tracking-widest text-secondary uppercase">{artwork.artist}</p>
+                      <p className="font-light text-foreground text-lg">
+                        {artwork.price.toLocaleString()} €
+                      </p>
+                    </div>
+                    <p className="text-xs text-muted-foreground pt-2">{artwork.category} • {artwork.year}</p>
                   </div>
-                  <p className="text-xs text-muted-foreground pt-2">{artwork.category} • {artwork.year}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-12 mt-40">
+          < div className="flex justify-center items-center gap-12 mt-40" >
             <button className="text-xs font-bold tracking-[0.2em] text-muted-foreground hover:text-primary transition-colors disabled:opacity-30">
               PRÉC
             </button>

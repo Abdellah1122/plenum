@@ -3,10 +3,14 @@
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
+import { supabase } from '@/lib/supabase'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { user, isLoaded } = useUser()
+  const [role, setRole] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +19,16 @@ export function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    async function fetchRole() {
+      if (user) {
+        const { data } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+        if (data) setRole(data.role)
+      }
+    }
+    if (isLoaded && user) fetchRole()
+  }, [isLoaded, user])
 
   const navLinks = [
     { href: '/', label: 'Accueil' },
@@ -76,16 +90,41 @@ export function Header() {
               <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full opacity-50" />
             </Link>
           ))}
-          <button className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors">
-            Compte
-          </button>
+
+          {role === 'admin' && (
+            <Link href="/admin" className="text-xs uppercase tracking-[0.2em] text-red-600 hover:text-red-800 font-bold transition-colors">
+              Admin
+            </Link>
+          )}
+
+          {role === 'artist' && (
+            <Link href="/artist" className="text-xs uppercase tracking-[0.2em] text-primary hover:text-secondary font-bold transition-colors">
+              Studio
+            </Link>
+          )}
+
+          {/* Auth Buttons */}
+          <SignedOut>
+            <SignInButton mode="modal">
+              <button className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors">
+                Connexion
+              </button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+
           <button className="text-xs uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors">
             Panier (0)
           </button>
         </div>
 
         {/* Mobile Cart/Account placeholders */}
-        <div className="lg:hidden flex gap-4">
+        <div className="lg:hidden flex gap-4 items-center">
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
           <span className="text-sm">Panier (0)</span>
         </div>
 
@@ -106,7 +145,12 @@ export function Header() {
               </Link>
             ))}
             <div className="h-[1px] w-12 bg-border my-4" />
-            <button className="text-sm uppercase tracking-widest">Compte</button>
+
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="text-sm uppercase tracking-widest" onClick={() => setIsOpen(false)}>Connexion</button>
+              </SignInButton>
+            </SignedOut>
           </div>
         </div>
       </div>

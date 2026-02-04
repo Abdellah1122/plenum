@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Manrope, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { ClerkProvider } from '@clerk/nextjs'
+import { ProfileSync } from '@/components/profile-sync'
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -45,11 +47,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}>
-        {children}
-        <Analytics />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`${manrope.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}>
+          <ProfileSync />
+          {children}
+          <Analytics />
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
