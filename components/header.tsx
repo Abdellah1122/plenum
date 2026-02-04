@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { SignInButton, SignedIn, SignedOut, UserButton, useUser } from '@clerk/nextjs'
 import { supabase } from '@/lib/supabase'
 import { useCart } from '@/context/cart-context'
+import { NotificationBell } from './notification-provider'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -105,6 +106,7 @@ export function Header() {
             </Link>
           )}
 
+
           {/* Auth Buttons */}
           <SignedOut>
             <SignInButton mode="modal">
@@ -114,7 +116,10 @@ export function Header() {
             </SignInButton>
           </SignedOut>
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <div className="flex items-center gap-4">
+              <NotificationBell />
+              <UserButton afterSignOutUrl="/" />
+            </div>
           </SignedIn>
 
 

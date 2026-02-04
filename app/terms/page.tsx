@@ -25,7 +25,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-4 tracking-tight">1. ACCEPTANCE OF TERMS</h2>
               <p className="text-muted-foreground leading-relaxed">
-                By accessing and using Plenum Qrts ("the Platform"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                By accessing and using Plenum Arts ("the Platform"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
             </div>
 
@@ -33,7 +33,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-4 tracking-tight">2. USE LICENSE</h2>
               <p className="text-muted-foreground leading-relaxed mb-3">
-                Permission is granted to temporarily download one copy of the materials (information or software) on Plenum Qrts for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                Permission is granted to temporarily download one copy of the materials (information or software) on Plenum Arts for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex gap-2">
@@ -63,7 +63,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">3. User Responsibilities</h2>
               <p className="text-muted-foreground leading-relaxed mb-3">
-                As a user of Plenum Qrts, you are responsible for:
+                As a user of Plenum Arts, you are responsible for:
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex gap-2">
@@ -89,7 +89,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">4. Artwork Authenticity</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Artists certify that all artworks submitted to Plenum Qrts are their original creations or that they have obtained proper permissions for sale. Artists are solely responsible for any disputes regarding ownership or copyright. Plenum Qrts reserves the right to remove any artwork suspected of infringement.
+                Artists certify that all artworks submitted to Plenum Arts are their original creations or that they have obtained proper permissions for sale. Artists are solely responsible for any disputes regarding ownership or copyright. Plenum Arts reserves the right to remove any artwork suspected of infringement.
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">5. Commission Structure</h2>
               <p className="text-muted-foreground leading-relaxed mb-3">
-                Plenum Qrts charges a 15% commission on all sales facilitated through the Platform. This covers:
+                Plenum Arts charges a 15% commission on all sales facilitated through the Platform. This covers:
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex gap-2">
@@ -127,7 +127,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">7. Limitation of Liability</h2>
               <p className="text-muted-foreground leading-relaxed">
-                The materials on Plenum Qrts are provided on an 'as is' basis. Plenum Qrts makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+                The materials on Plenum Arts are provided on an 'as is' basis. Plenum Arts makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
               </p>
             </div>
 
@@ -143,7 +143,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">9. Account Termination</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Plenum Qrts reserves the right, in its sole discretion, to terminate any account or user access if the user violates these terms or engages in conduct deemed harmful to the Platform, other users, or artists.
+                Plenum Arts reserves the right, in its sole discretion, to terminate any account or user access if the user violates these terms or engages in conduct deemed harmful to the Platform, other users, or artists.
               </p>
             </div>
 
@@ -151,7 +151,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">10. Dispute Resolution</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Any dispute arising from the use of Plenum Qrts shall be resolved through mutual negotiation. If unresolved within 30 days, disputes shall be subject to binding arbitration under the rules of the American Arbitration Association.
+                Any dispute arising from the use of Plenum Arts shall be resolved through mutual negotiation. If unresolved within 30 days, disputes shall be subject to binding arbitration under the rules of the American Arbitration Association.
               </p>
             </div>
 
@@ -159,7 +159,7 @@ export default function Terms() {
             <div>
               <h2 className="text-2xl font-light text-foreground mb-4">11. Modifications to Terms</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Plenum Qrts may revise these terms of service for its Platform at any time without notice. By using this Platform, you are agreeing to be bound by the then current version of these terms of service.
+                Plenum Arts may revise these terms of service for its Platform at any time without notice. By using this Platform, you are agreeing to be bound by the then current version of these terms of service.
               </p>
             </div>
 
@@ -177,7 +177,7 @@ export default function Terms() {
               <p className="text-muted-foreground mb-4">
                 If you have questions about these Terms of Service, please contact us at:
               </p>
-              <p className="text-primary font-medium">legal@plenumqrts.com</p>
+              <p className="text-primary font-medium">legal@plenumArts.com</p>
             </div>
           </div>
         </section>

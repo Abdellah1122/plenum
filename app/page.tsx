@@ -55,7 +55,7 @@ export default function Home() {
             </div>
             <div className="space-y-8">
               <p className="text-2xl font-light text-foreground/90 leading-relaxed">
-                Plenum Qrts est plus qu'une simple galerie. C'est un dialogue entre le créateur et l'observateur. Nous sélectionnons des œuvres qui interpellent, inspirent et perdurent.
+                Plenum Arts est plus qu'une simple galerie. C'est un dialogue entre le créateur et l'observateur. Nous sélectionnons des œuvres qui interpellent, inspirent et perdurent.
               </p>
               <div className="h-[1px] w-full bg-border" />
               <div className="grid grid-cols-2 gap-8">

@@ -69,17 +69,26 @@ export default function AdminDashboard() {
                 <div className="max-w-[1800px] mx-auto px-6 sm:px-12">
                     <h1 className="text-4xl font-heading mb-8">Admin Dashboard</h1>
 
-                    <div className="flex gap-8 border-b border-border mb-8">
-                        {['validation', 'users', 'logs'].map((tab) => (
-                            <button
-                                key={tab}
-                                onClick={() => setActiveTab(tab as any)}
-                                className={`pb-4 text-sm font-bold tracking-[0.2em] uppercase transition-colors ${activeTab === tab ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-primary'
-                                    }`}
-                            >
-                                {tab === 'validation' ? 'Validations' : tab === 'users' ? 'Utilisateurs' : 'Logs'}
-                            </button>
-                        ))}
+                    <div className="flex gap-8 border-b border-border mb-8 items-center justify-between">
+                        <div className="flex gap-8">
+                            {['validation', 'users', 'logs'].map((tab) => (
+                                <button
+                                    key={tab}
+                                    onClick={() => setActiveTab(tab as any)}
+                                    className={`pb-4 text-sm font-bold tracking-[0.2em] uppercase transition-colors ${activeTab === tab ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-primary'
+                                        }`}
+                                >
+                                    {tab === 'validation' ? 'Validations' : tab === 'users' ? 'Utilisateurs' : 'Logs'}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => router.push('/admin/auctions')}
+                            className="pb-4 text-sm font-bold tracking-[0.2em] uppercase text-primary hover:text-primary/80 flex items-center gap-2"
+                        >
+                            <span>Gérer les Enchères</span>
+                            <span className="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full">New</span>
+                        </button>
                     </div>
 
                     {loading ? (
@@ -139,8 +148,8 @@ export default function AdminDashboard() {
                                                             </select>
                                                         ) : (
                                                             <span className={`px-2 py-1 text-xs font-bold uppercase rounded ${u.role === 'admin' ? 'bg-red-100 text-red-800' :
-                                                                    u.role === 'artist' ? 'bg-purple-100 text-purple-800' :
-                                                                        'bg-secondary/10 text-secondary'
+                                                                u.role === 'artist' ? 'bg-purple-100 text-purple-800' :
+                                                                    'bg-secondary/10 text-secondary'
                                                                 }`}>{u.role}</span>
                                                         )}
                                                     </td>

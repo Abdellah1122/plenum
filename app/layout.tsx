@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Plenum Qrts - Contemporary Art Marketplace',
+  title: 'Plenum Arts - Contemporary Art Marketplace',
   description: 'Discover and purchase contemporary art from talented artists worldwide',
   generator: 'v0.app',
   icons: {
@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 }
 
 import { CartProvider } from '@/context/cart-context';
+import { NotificationProvider } from '@/components/notification-provider';
 
 export default function RootLayout({
   children,
@@ -53,9 +54,11 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${manrope.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}>
           <CartProvider>
-            <ProfileSync />
-            {children}
-            <Analytics />
+            <NotificationProvider>
+              <ProfileSync />
+              {children}
+              <Analytics />
+            </NotificationProvider>
           </CartProvider>
         </body>
       </html>

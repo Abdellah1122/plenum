@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link'
+import { supabase } from '@/lib/supabase'
 
 export function Footer() {
   return (
@@ -47,10 +50,15 @@ export function Footer() {
           <div className="md:col-span-2">
             <h3 className="text-xs font-bold tracking-[0.2em] text-secondary mb-8">LÉGAL</h3>
             <ul className="space-y-4">
-              {['Termes & Conditions', 'Confidentialité', 'Mentions Légales', 'Expédition'].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-sm font-medium hover:text-secondary transition-colors opacity-80 hover:opacity-100">
-                    {item}
+              {[
+                { label: 'Termes & Conditions', href: '/legal/terms' },
+                { label: 'Confidentialité', href: '/legal/privacy' },
+                { label: 'Mentions Légales', href: '/legal/legal-notice' },
+                { label: 'Expédition', href: '/legal/shipping' }
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm font-medium hover:text-secondary transition-colors opacity-80 hover:opacity-100">
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -63,8 +71,27 @@ export function Footer() {
             <p className="text-sm text-primary-foreground/60 mb-6 font-light">
               Recevez nos dernières acquisitions et invitations exclusives.
             </p>
-            <div className="flex border-b border-primary-foreground/30 pb-2">
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                // @ts-ignore
+                const email = e.target.elements.email.value;
+                if (!email) return;
+
+                const { error } = await supabase.from('newsletter_subscribers').insert({ email });
+                if (error) {
+                  if (error.code === '23505') alert('Vous êtes déjà inscrit !');
+                  else alert('Erreur: ' + error.message);
+                } else {
+                  alert('Inscription réussie !');
+                  // @ts-ignore
+                  e.target.reset();
+                }
+              }}
+              className="flex border-b border-primary-foreground/30 pb-2"
+            >
               <input
+                name="email"
                 type="email"
                 placeholder="Votre email"
                 className="bg-transparent border-none focus:outline-none w-full placeholder:text-primary-foreground/30 text-sm"
@@ -72,12 +99,12 @@ export function Footer() {
               <button className="text-xs font-bold tracking-widest hover:text-secondary transition-colors uppercase">
                 S'inscrire
               </button>
-            </div>
+            </form>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-end border-t border-primary-foreground/10 pt-8 opacity-40">
-          <p className="text-xs font-heading">© 2024 PLENUM QRTS. TOUS DROITS RÉSERVÉS.</p>
+          <p className="text-xs font-heading">© 2024 PLENUM Arts. TOUS DROITS RÉSERVÉS.</p>
           <p className="text-[10vw] leading-[0.8] font-heading font-bold text-primary-foreground/10 select-none hidden md:block">
             ART / WORK
           </p>

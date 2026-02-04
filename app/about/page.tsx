@@ -17,7 +17,7 @@ export default function About() {
               </h1>
             </div>
             <p className="text-xl md:text-2xl font-light text-foreground/80 leading-relaxed max-w-lg">
-              Plenum Qrts sert de pont entre le visionnaire et le collectionneur. Nous ne vendons pas seulement de l'art ; nous cultivons une nouvelle génération de mécénat.
+              Plenum Arts sert de pont entre le visionnaire et le collectionneur. Nous ne vendons pas seulement de l'art ; nous cultivons une nouvelle génération de mécénat.
             </p>
           </div>
         </section>

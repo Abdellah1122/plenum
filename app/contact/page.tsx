@@ -26,7 +26,7 @@ export default function Contact() {
                 icon: '+',
                 title: 'EMAIL',
                 desc: 'Send us a message',
-                value: 'hello@plenumqrts.com',
+                value: 'hello@plenumArts.com',
               },
               {
                 icon: '◆',

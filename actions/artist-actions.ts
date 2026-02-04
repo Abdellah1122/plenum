@@ -7,45 +7,59 @@ const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAdmin = createClient(supabaseUrl!, serviceRoleKey!);
 
-export async function submitArtwork(formData: {
+type ArtworkSubmission = {
     title: string;
     price: number;
     image_url: string;
-    description?: string;
-}) {
-    const user = await currentUser();
-    if (!user) return { success: false, error: 'Unauthorized' };
+    category: string;
+    sellingMethod: 'fixed' | 'auction';
+    // Auction fields
+    reservePrice?: number;
+    desiredStartDate?: string;
+    desiredEndDate?: string;
+}
 
-    // Verify Artist Role
-    // For now, let's allow anyone to submit if they are logged in, 
-    // OR strictly check if role is 'artist'.
-    // Let's implement the check for safety.
+export async function submitArtwork(formData: ArtworkSubmission) {
+    const user = await currentUser();
+    if (!user) return { success: false, error: 'Unauthorized: Please login.' };
+
+    // 1. Verify Artist Role
     const { data: profile } = await supabaseAdmin
         .from('profiles')
         .select('role, full_name')
         .eq('id', user.id)
         .single();
 
-    // Allow 'artist' and 'admin' (for testing)
-    if (!profile || !['artist', 'admin'].includes(profile.role)) {
-        // For the prototype, maybe we relax this? 
-        // User said "only if it won't affect normal use".
-        // If a regular user tries to access /artist, they shouldn't be able to submit.
+    if (!profile) {
+        return { success: false, error: 'Profile not found. Please complete onboarding.' };
+    }
+
+    // Strict role check: must be artist or admin
+    if (!['artist', 'admin'].includes(profile.role)) {
         return { success: false, error: 'Unauthorized: Artist role required.' };
     }
 
+    const status = formData.sellingMethod === 'auction' ? 'pending_auction' : 'pending_approval';
+
+    // 2. AdminInsert artwork (Bypasses RLS)
     const { error } = await supabaseAdmin.from('artworks').insert({
         title: formData.title,
         artist: profile.full_name || 'Unknown Artist',
         artist_id: user.id,
         price: formData.price,
         image_url: formData.image_url,
-        status: 'pending_approval',
+        status: status,
         year: new Date().getFullYear().toString(),
-        category: 'Peinture' // Default
+        category: formData.category,
+        reserve_price: formData.sellingMethod === 'auction' && formData.reservePrice ? formData.reservePrice : null,
+        desired_start_date: formData.sellingMethod === 'auction' ? formData.desiredStartDate : null,
+        desired_end_date: formData.sellingMethod === 'auction' ? formData.desiredEndDate : null,
     });
 
-    if (error) return { success: false, error: error.message };
+    if (error) {
+        console.error('Server Action Error:', error);
+        return { success: false, error: error.message };
+    }
 
     return { success: true };
 }
